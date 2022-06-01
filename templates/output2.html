@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+Result
+{% endblock %}
+
+{% block content %}
+    <main class="page contact-us-page">
+        <section class="clean-block clean-form dark">
+            <!-- <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Select the axes and the kind of plot you need</h2>
+                    <p>Lumos - Select right to light</p>
+                </div>
+                <center>
+                    {% for table in tables %}
+                        {{ table|safe }}
+                    {% endfor %}
+                </center>
+                <br><br>
+                <form action="{{url_for('plot')}}" method="POST" enctype="multipart/form-data">
+                    <div class="form-group"><label>Select X Axis</label><select class="form-control" name="x_axis" required>
+                        <option value=""></option>
+                        {% for column in cols %}
+                        <option value="{{column|string}}">{{column}}</option>
+                        {% endfor %}
+                    </select></div>
+                    <div class="form-group"><label>Select Y Axis</label><select class="form-control" name="y_axis" required>
+                        <option value=""></option>
+                        {% for column in cols %}
+                        <option value="{{column|string}}">{{column}}</option>
+                        {% endfor %}
+                    </select></div>
+                    <div class="form-group"><label>Plot Type</label><select class="form-control" name="plot_type" required>
+                        <option value=""></option>
+                        <option value="scatter">Scatter Plot</option>
+                        <option value="line">Line Plot</option>
+                        <option value="bar">Bar Plot</option>
+                        <option value="sunburst">Sunburst Plot</option>
+                        <option value="corelation">Correlation Matrix</option>
+                        <option value="table">Table</option>
+                    </select><br><br>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Plot</button></div>
+                </form>
+            </div> -->
+    
+            <div class="container">
+                <div class="block-heading">
+                    <!-- <h2 class="text-info">The Plot is ready</h2>
+                    <p>Silencio - Let the plot speak</p> -->
+                </div>
+                <div class="chart" id="bargraph">
+                    <script>
+                        var graphs = {{plot | safe}};
+                        console.log("Graphs",graphs)
+                        Plotly.plot('bargraph',graphs,{});
+                    </script>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

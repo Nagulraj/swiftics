@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    
+    <main class="page landing-page">
+        <section class="clean-block clean-hero" style="background-image:url('./static/img/image.png'); color:rgba(255, 255, 255, 0.85);">
+            <div class="text">
+                <h2 style="color: black;">Welcome to Smalltics</h2>
+                <p style="color: black;"> A web based analytical platform</p>
+                <br><br>
+                <a  style="color: white;" class="btn btn-dark btn-lg" role="button" href="{{url_for('upload')}}">Upload File</a>
+
+                <br><br><br>
+            </div>
+        </section>
+    </main>
+{% endblock %}

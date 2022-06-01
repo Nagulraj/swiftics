@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+Result
+{% endblock %}
+
+{% block content %}
+<main class="page contact-us-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">Select the axes and the kind of plot you need</h2>
+                <!-- <p>Lumos - Select right to light</p> -->
+            </div>
+            <center>
+                {% for table in tables %}
+                {{ table|safe }}
+                {% endfor %}
+            </center>
+            <br><br>
+            <form action="{{url_for('plot')}}" method="POST" enctype="multipart/form-data">
+                <div class="form-group"><label>Select X Axis</label><select class="form-control" name="x_axis" required>
+                        <option value=""></option>
+                        {% for column in cols %}
+                        <option value="{{column|string}}">{{column}}</option>
+                        {% endfor %}
+                    </select></div>
+                <div class="form-group"><label>Select Y Axis</label><select class="form-control" name="y_axis" required>
+                        <option value=""></option>
+                        {% for column in cols %}
+                        <option value="{{column|string}}">{{column}}</option>
+                        {% endfor %}
+                    </select></div>
+                <div class="form-group"><label>Plot Type</label><select class="form-control" name="plot_type" required>
+                        <option value=""></option>
+                        <option value="scatter">Scatter Plot</option>
+                        <option value="line">Line Plot</option>
+                        <option value="bar">Bar Plot</option>
+                        <option value="sunburst">Sunburst Plot</option>
+                        <option value="corelation">Correlation Matrix</option>
+                        <option value="table">Table</option>
+                    </select><br><br>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Plot</button></div>
+            </form>
+        </div>
+
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">The Plot is ready</h2>
+                <p>Silencio - Let the plot speak</p>
+            </div>
+            <div>
+                <textarea id="content" style="
+                    font-family: 'Roboto', sans-serif;
+                    color: #333;
+                    font-size: 1rem;
+                      /* margin: 0 auto; */
+                    /* padding: 1rem ; */
+                    border-radius: 0.2rem;
+                    height: 35px;
+                    background-color: rgb(255, 255, 255);
+                    border: none;
+                    width: 35%;
+                    display: block;
+                    border-bottom: 0.3rem solid transparent;
+                    transition: all 0.3s;
+                    overflow: hidden;
+                    text-align: center;
+                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                  
+                  ">{{link}}</textarea>
+                <button onclick="copy()">Copy</button>
+                <script>
+
+
+                    function copy() {
+                        let textarea = document.getElementById("content");
+                        textarea.select();
+                        document.execCommand("copy");
+                        alert('text copied to clipboard');
+                    }
+
+                </script>
+            </div>
+            <div class="chart" id="bargraph">
+                <script>
+                    // var graphs = {{plot | safe}};
+                    // console.log("Graphs",graphs)
+                    // Plotly.plot('bargraph',graphs,{});
+
+                    var id = {{ id }}
+
+                    console.log("ID", id);
+
+                        // if(id){
+                        //     window.location.href    =   `http://127.0.0.1:3000/plot/${id}`
+                        // }
+
+                </script>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
