@@ -9,12 +9,16 @@ import plotly
 import plotly.express as px
 import plotly.graph_objects as go
 import random
+import os
+from dotenv import load_dotenv
 
 df = pd.DataFrame({})
 
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER']	= "static/datasets/"
+
+LINK = os.environ.get("LINK")
 
 @app.route("/")
 def index():
@@ -140,7 +144,7 @@ def plot():
     id_entries['col_1'] =  x_ax
     id_entries['col_2'] = y_ax
     id_entries['chart_name'] = plot
-    id_entries["web"] = "https://swiftics.herokuapp.com/plot/"+id1
+    id_entries["web"] = LINK+id1
     # id_entries['web'] = web
     # id_entries['web'] = fig_html
     entries_dict[id1] = id_entries 
